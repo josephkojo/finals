@@ -384,32 +384,28 @@ public class ManageBooks extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_rSMaterialButtonCircle2MouseClicked
 
-    private Boolean isAdded() throws SQLException{
+    private boolean isAdded() throws SQLException {
         boolean isAdded = false;
-        int BookId = Integer.parseInt(txtBookId.getText());
-        String BookName = txtBookName.getText();
-        String Author = txtAuthor.getText();
-        int quanty = Integer.parseInt(txtQuantity.getText());
-        
-        
-        Connection connection  = DbConnection.getConnection();
-        String query = "INSERT INTO book_details values (?,?,?,?)";
+        int bookId = Integer.parseInt(txtBookId.getText());
+        String bookName = txtBookName.getText();
+        String author = txtAuthor.getText();
+        int quantity = Integer.parseInt(txtQuantity.getText());
+
+        Connection connection = DbConnection.getConnection();
+        String query = "INSERT INTO book_details (book_id, book_name, author, quantity) VALUES (?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, BookId);
-        statement.setString(2, BookName);
-        statement.setString(3, Author);
-        statement.setInt(4, quanty);
-        
-        
+        statement.setInt(1, bookId);
+        statement.setString(2, bookName);
+        statement.setString(3, author);
+        statement.setInt(4, quantity);
+
         int inserted = statement.executeUpdate();
-        if(inserted > 0){
+        if (inserted > 0) {
             isAdded = true;
-        }else{
+        } else {
             isAdded = false;
         }
         return isAdded;
-        
-        
     }
     /**
      * @param args the command line arguments
